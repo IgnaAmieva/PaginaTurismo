@@ -1,0 +1,11 @@
+  {
+    "scripts": {
+      "build": "echo 'No se requiere build'"
+    },
+    "dependencies": {
+      "@flaticon/flaticon-uicons": "^3.3.1",
+      "firebase": "^11.4.0"
+    }
+  }
+  
+

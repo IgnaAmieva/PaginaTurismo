@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <!-- Codificación y responsividad -->
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+   <!-- Título único para el index (puedes personalizarlo) -->
+   <title>Frecuencia Sur Ushuaia - Inicio</title>
+   
+   <!-- Meta descripción (importante para SEO, única por página) -->
+   <meta name="description" content="Frecuencia Sur Ushuaia ofrece tours y trekking en el fin del mundo. Descubre aventuras inolvidables en Tierra del Fuego y vive experiencias únicas." />
+   
+   <!-- Meta keywords (opcional, hoy en día menos relevante) -->
+   <meta name="keywords" content="trekking, tours, Ushuaia, Tierra del Fuego, aventura, expedición" />
+   
+   <!-- Autor del sitio -->
+   <meta name="author" content="Frecuencia Sur Ushuaia" />
+
+   <meta name="color-scheme" content="light">
+
+   
+   <!-- URL canónica para evitar contenido duplicado -->
+   <link rel="canonical" href="https://www.frecuenciasurushuaia.com/index.html" />
+   
+   <!-- Open Graph: mejora la apariencia cuando se comparta en redes sociales -->
+   <meta property="og:title" content="Frecuencia Sur Ushuaia - Inicio" />
+   <meta property="og:description" content="Frecuencia Sur Ushuaia ofrece tours y trekking en el fin del mundo. Descubre aventuras inolvidables en Tierra del Fuego y vive experiencias únicas." />
+   <meta property="og:image" content="https://www.frecuenciasurushuaia.com/images/logo.png" />
+   <meta property="og:url" content="https://www.frecuenciasurushuaia.com/index.html" />
+   <meta property="og:type" content="website" />
+      
+   <!-- Favicon (icono de la pestaña del navegador) -->
+   <link rel="icon" href="images/logos/1.png" type="image/x-icon" />
+   
+   <!-- Google Fonts -->
+   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+   
+   <!-- Hoja de estilo principal -->
+   <link rel="stylesheet" href="css/styles.css" />
+   
+   <!-- Librería i18next para traducciones -->
+   <script src="https://unpkg.com/i18next@21.6.0/dist/umd/i18next.min.js"></script>
+
+   <!-- Firebase App (la base de SDK de Firebase) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<!-- Firestore (la base de datos) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+   
+   <!-- Google Analytics (reemplaza 'TU-ID' por tu ID de seguimiento) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=TU-ID"></script>
+   <script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+     gtag('config', 'TU-ID');
+   </script>
+
+   <!-- Tu configuración de Firebase -->
+<script src="js/firebase-config.js"></script>
+
+  <!-- Ajustes de tipografía/tamaño (solo escritorio) -->
+  <style>
+    @media (min-width: 1024px) {
+      header.navbar {
+        background-color: #fff;
+        border-bottom: 1px solid #ddd;
+      }
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 30px;
+      }
+      .nav-links ul li a {
+        font-size: 1.1rem;
+      }
+      .logo-text {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+    <!-- Banner de Cookies -->
+<div id="cookieConsentBanner" class="cookie-banner">
+  <p>
+    Este sitio web utiliza cookies para mejorar tu experiencia y analizar el tráfico. 
+    <a href="política-cookies.html" target="_blank">Más información</a>.
+    <a href="política-privacidad.html" target="_blank">Política de Privacidad</a>
+  </p>
+  <button id="acceptCookies">Aceptar</button>
+</div>
+
+  <!-- NAVBAR -->
+  <header class="navbar transparent" id="navbar">
+    <div class="nav-container">
+      <!-- LOGO -->
+      <div class="logo-area">
+        <img src="images/logos/1.png" alt="Logo" class="logo-img" loading="lazy"/>
+        <span class="logo-text" data-i18n="navbar.logoText">Frecuencia Sur Ushuaia</span>
+      </div>
+
+      <!-- Menú (desktop & mobile) -->
+      <nav class="nav-links" id="navLinks">
+        <ul>
+          <li><a href="#home" data-i18n="navbar.inicio">Inicio</a></li>
+          <li><a href="#tours" data-i18n="navbar.tours">Tours</a></li>
+          <li><a href="#sobreNosotros" data-i18n="navbar.sobreNosotros">Sobre Nosotros</a></li>
+          <li><a href="#contact" data-i18n="navbar.contacto">Contacto</a></li>
+          <li class="nav-last-item">
+            <a href="#ustedes" data-i18n="navbar.ustedes">Ustedes</a>
+          </li>
+          <!-- Dropdown de idioma -->
+          <li class="lang-dropdown">
+            <button class="lang-main-btn" id="langMainBtn" data-i18n="navbar.lenguajeBtn">Lenguaje</button>
+            <div class="dropdown-content" id="dropdownContent">
+              <button class="lang-btn" data-lang="es">ES</button>
+              <button class="lang-btn" data-lang="en">EN</button>
+              <button class="lang-btn" data-lang="pt">PT</button>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Botón hamburguesa (móvil) -->
+      <div class="hamburger" id="hamburgerBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO PARA ESCRITORIO -->
+  <section class="hero hero-desktop" id="home">
+    <div class="carousel-container">
+      <!-- Slide 1 -->
+      <div class="carousel-slide active">
+        <img src="images/esmeralda/imagenHorinzontal.jpg" alt="Imagen 1" loading="lazy"/>
+      </div>
+      <!-- Slide 2 -->
+      <div class="carousel-slide">
+        <img src="imagenes-finales/GLACIAR-OJO-DE-ALBINO/Imagen de WhatsApp 2025-02-24 a las 17.49.32_64863860.jpg" alt="Imagen 2" loading="lazy"/>
+        <div class="carousel-caption"></div>
+      </div>
+      <!-- Slide 3 -->
+      <div class="carousel-slide active">
+        <img src="imagenes-finales/GlacialMartial/AQ3Q3838.jpg" alt="Imagen 3" loading="lazy"/>
+      </div>
+    </div>
+
+    <!-- LOGO GRANDE EN HERO (ESCRITORIO) -->
+    <div class="hero-logo-container">
+      <img src="images/logos/1 (1).png" alt="Logo Hero" class="hero-logo" loading="lazy"/>
+    </div>
+
+    <!-- Onda (montaña) al final del hero para ESCRITORIO -->
+    <svg class="hero-wave" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path fill="#fff" d="M0,180L30,160C60,140,120,100,180,120C240,140,300,220,360,240C420,260,480,220,540,210C600,200,660,220,720,230C780,240,840,220,900,190C960,160,1020,120,1080,130C1140,140,1200,180,1260,190C1320,200,1380,180,1410,170L1440,160L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path>
+    </svg>
+  </section>
+
+  <!-- HERO PARA MÓVIL -->
+  <section class="hero hero-mobile" id="homeMobile">
+    <div class="carousel-container-mobile">
+      <!-- Slide 1 -->
+      <div class="carousel-slide-mobile active">
+        <img src="images/esmeralda/senderoEsmeraldaLeo.jpg" alt="Imagen 1" loading="lazy">
+      </div>
+      <!-- Slide 2 -->
+      <div class="carousel-slide-mobile active">
+        <img src="images/caminata-alto.jpg" alt="Imagen 1" loading="lazy">
+      </div>
+      <!-- Slide 3 -->
+      <div class="carousel-slide-mobile active">
+        <img src="images/caminata-bosque.jpg" alt="Imagen 1" loading="lazy">
+      </div>
+      <!-- Slide 4 -->
+      <div class="carousel-slide-mobile">
+        <img src="imagenes-finales/glaciarVinciguerra/chicaGlaciar.jpg" alt="Imagen 2" loading="lazy">
+      </div>
+      <!-- Slide 5 -->
+      <div class="carousel-slide-mobile">
+        <img src="imagenes-finales/GLACIAR-OJO-DE-ALBINO/nievearriba.jpg" alt="Imagen 3"loading="lazy">
+      </div>
+      <!-- Slide 6 -->
+      <div class="carousel-slide-mobile">
+        <img src="imagenes-finales/GLACIAR-OJO-DE-ALBINO/WhatsApp-Image-2023-02-24-at-19.46.14-1.jpeg" alt="Imagen 4" loading="lazy">
+      </div>
+      <!-- Slide 7 -->
+      <div class="carousel-slide-mobile">
+        <img src="images/caminata-puente.jpg" alt="Imagen 4" loading="lazy">
+      </div>
+    </div>
+
+    <!-- LOGO GRANDE EN HERO (MÓVIL) -->
+    <div class="hero-logo-container">
+      <img src="images/logos/1 (1).png" alt="Logo Hero" class="hero-logo" />
+    </div>
+
+    <!-- Onda (montaña) al final del hero para MÓVIL -->
+    <svg class="hero-wave" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path fill="#fff" d="M0,180L30,160C60,140,120,100,180,120C240,140,300,220,360,240C420,260,480,220,540,210C600,200,660,220,720,230C780,240,840,220,900,190C960,160,1020,120,1080,130C1140,140,1200,180,1260,190C1320,200,1380,180,1410,170L1440,160L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path>
+    </svg>
+  </section>
+
+  <!-- SECCIÓN TOURS -->
+  <section class="tours-section fade-in-section" id="tours">
+    <h2 data-i18n="tours.title">Tours, Expediciones y Actividades</h2>
+    <div class="tours-line"></div>
+    <p class="tours-paragraph" data-i18n="tours.paragraph">
+      No importa si viajas solo, en grupo o familia...
+    </p>
+
+    <div class="cards">
+      <!-- Tarjeta 1 -->
+      <div class="card">
+        <span class="tag-tours" data-i18n="tours.card1tag">Dificultad Baja</span>
+        <img src="images/esmeralda/cascadita.jpg" alt="Card 1" loading="lazy">
+        <div class="card-content">
+          <div class="location-info">
+            <svg viewBox="0 0 384 512">
+              <path d="M168 0C75.4 0 0 75.4 0 168c0 87.6 141.2 297.2 151.2 311.4
+                       8.3 11.7 25.3 11.7 33.6 0C182.8 465.2 324 255.6 324 168
+                       324 75.4 248.6 0 168 0zm0 248c-44.2 0-80-35.8-80-80
+                       0-44.1 35.8-80 80-80s80 35.9 80 80c0 44.2-35.8 80-80 80z"/>
+            </svg>
+            <span data-i18n="tours.card1location">Laguna Esmeralda</span>
+          </div>
+          <a href="actividades/lagunaEsmeralda.html" class="btn-card" data-i18n="tours.cardBtn">Ver Tour</a>
+        </div>
+      </div>
+      <!-- Tarjeta 2 -->
+      <div class="card">
+        <span class="tag-tours" data-i18n="tours.card2tag">Dificultad Alta</span>
+        <img src="imagenes-finales/GLACIAR-OJO-DE-ALBINO/glaciarhd.png" alt="Card 2" loading="lazy">
+        <div class="card-content">
+          <div class="location-info">
+            <svg viewBox="0 0 384 512">
+              <path d="M168 0C75.4 0 0 75.4 0 168c0 87.6 141.2 297.2 151.2 311.4
+                       8.3 11.7 25.3 11.7 33.6 0C182.8 465.2 324 255.6 324 168
+                       324 75.4 248.6 0 168 0zm0 248c-44.2 0-80-35.8-80-80
+                       0-44.1 35.8-80 80-80s80 35.9 80 80c0 44.2-35.8 80-80 80z"/>
+            </svg>
+            <span data-i18n="tours.card2location">Glaciar y Laguna Ojo de Albino</span>
+          </div>
+          <a href="actividades/ojoDeAlbino.html" class="btn-card" data-i18n="tours.cardBtn">Ver Tour</a>
+        </div>
+      </div>
+      <!-- Tarjeta 3 -->
+      <div class="card">
+        <span class="tag-tours" data-i18n="tours.card3tag">Dificultad Media</span>
+        <img src="imagenes-finales/GlacialMartial/AQ3Q3820.jpg" alt="Card 3" loading="lazy">
+        <div class="card-content">
+          <div class="location-info">
+            <svg viewBox="0 0 384 512">
+              <path d="M168 0C75.4 0 0 75.4 0 168c0 87.6 141.2 297.2 151.2 311.4
+                       8.3 11.7 25.3 11.7 33.6 0C182.8 465.2 324 255.6 324 168
+                       324 75.4 248.6 0 168 0zm0 248c-44.2 0-80-35.8-80-80
+                       0-44.1 35.8-80 80-80s80 35.9 80 80c0 44.2-35.8 80-80 80z"/>
+            </svg>
+            <span data-i18n="tours.card3location">Glaciar Martial</span>
+          </div>
+          <a href="actividades/glaciarMartial.html" class="btn-card" data-i18n="tours.cardBtn">Ver Tour</a>
+        </div>
+      </div>
+      <!-- Tarjeta 4 -->
+      <div class="card">
+        <span class="tag-tours" data-i18n="tours.card4tag">Dificultad Media</span>
+        <img src="imagenes-finales/glaciarVinciguerra/glaciar-leo.jpg" alt="Card 4" loading="lazy">
+        <div class="card-content">
+          <div class="location-info">
+            <svg viewBox="0 0 384 512">
+              <path d="M168 0C75.4 0 0 75.4 0 168c0 87.6 141.2 297.2 151.2 311.4
+                       8.3 11.7 25.3 11.7 33.6 0C182.8 465.2 324 255.6 324 168
+                       324 75.4 248.6 0 168 0zm0 248c-44.2 0-80-35.8-80-80
+                       0-44.1 35.8-80 80-80s80 35.9 80 80c0 44.2-35.8 80-80 80z"/>
+            </svg>
+            <span data-i18n="tours.card4location">Glaciar Vinciguerra</span>
+          </div>
+          <a href="actividades/glaciarVinciguerra.html" class="btn-card" data-i18n="tours.cardBtn">Ver Tour</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN SOBRE NOSOTROS -->
+  <section class="about-section fade-in-section" id="sobreNosotros">
+    <div class="about-left">
+      <h1 class="about-title" data-i18n="about.title">¿Quiénes somos?</h1>
+      <div class="about-line"></div>
+      <p class="about-paragraph" data-i18n="about.paragraph">
+        Somos una empresa amante de la naturaleza dedicada a realizar actividades de trekking y montaña. Está conformada por Guías locales con una amplia experiencia en la materia para poder brindarte seguridad y toda la información necesaria para que disfrutes de una aventura inolvidable en el fin del mundo.
+      </p>
+      <div class="about-horizontal-image fade-in-side">
+        <img src="images/sobre nosotros/leitoayudando.jpg" alt="Imagen horizontal" loading="lazy"/>
+      </div>
+    </div>
+    <div class="about-vertical-image fade-in-side">
+      <img src="images/sobre nosotros/leitocaminata.jpg" alt="Imagen vertical grande" loading="lazy" />
+    </div>
+  </section>
+
+  <!-- SECCIÓN MÉTODOS DE PAGO (opcional) -->
+<section class="payment-logos-section">
+  <div class="payment-logos-container">
+    <img src="icons/DolarApp (1).png" alt="Visa" class="payment-img" loading="lazy">
+    <img src="icons/mercado-pago-fotor-bg-remover-20250307113550.png" alt="Mastercard" class="payment-img" loading="lazy">
+    <img src="icons/paypalpng-fotor-bg-remover-20250307113450.png" alt="PayPal" class="payment-img" loading="lazy">
+  </div>
+</section>
+
+
+  <!-- CONTENEDOR CON DEGRADADO -->
+  <div class="gradient-bg">
+    <!-- SECCIÓN CONTACTO -->
+<!-- SECCIÓN CONTACTO -->
+<section class="contact-section fade-in-section" id="contact">
+  <div class="contact-card">
+    <!-- LOGO arriba -->
+    <div>
+      <!-- Cambia la ruta por tu propio logo -->
+      <img src="images/logos/1.png" alt="Tu Logo" class="contact-logo" loading="lazy"/>
+    </div>
+
+    <!-- Título y párrafo -->
+    <h2 data-i18n="contact.title">¿Listo para tu Aventura?</h2>
+    <p data-i18n="contact.paragraph">
+      ¡Queremos saber de ti! Escríbenos o síguenos en redes...
+    </p>
+
+    <!-- Íconos de contacto (sin Facebook) -->
+    <div class="contact-icons">
+      <a href="mailto:frecuenciasurushuaia@gmail.com" target="_blank">
+        <img src="icons/sobre.png" alt="Mail" class="contact-button" loading="lazy"/>
+      </a>
+      <a href="https://wa.me/92901489265" target="_blank">
+        <img src="icons/whatsapp.png" alt="WhatsApp" class="contact-button" loading="lazy"/>
+      </a>
+      <a href="https://instagram.com/frecencia_sur_" target="_blank">
+        <img src="icons/instagram.png" alt="Instagram" class="contact-button" loading="lazy" />
+      </a>
+    </div>
+
+    <!-- Botón CTA destacado para reservar -->
+    <a data-i18n="contact.paragraph2" href="https://wa.me/92901489265" class="contact-cta">¡Reserva Ahora!</a>
+  </div>
+</section>
+
+    <!-- SECCIÓN USTEDES (Testimonios) -->
+    <section class="ustedes-section fade-in-section" id="ustedes">
+      <div class="ustedes-card">
+        <h2 data-i18n="ustedes.title">¡Ustedes!</h2>
+        <p data-i18n="ustedes.paragraph">Conoce algunas experiencias increíbles de nuestros viajeros</p>
+        <div class="ustedes-carousel">
+          <!-- Slide 1 -->
+          <div class="ustedes-slide">
+            <div class="ustedes-slide-media">
+              <video src="imagenes-finales/testimonios/caminatamontaña.mp4"
+                     muted autoplay loop playsinline>
+              </video>
+            </div>
+            <p data-i18n="ustedes.slide1">“Caminata hacia el Glaciar Ojo del Albino.”</p>
+          </div>
+          <!-- Slide 2 -->
+          <div class="ustedes-slide">
+            <div class="ustedes-slide-media">
+              <video src="video/Video de WhatsApp 2025-02-18 a las 17.05.35_ada280db.mp4"
+                     muted autoplay loop playsinline>
+              </video>
+            </div>
+            <p data-i18n="ustedes.slide2">“La hermosa Laguna de los Témpanos.”</p>
+          </div>
+          <!-- Slide 3 -->
+          <div class="ustedes-slide">
+            <div class="ustedes-slide-media">
+              <img src="imagenes-finales/testimonios/chicaGlaciar.jpg" alt="Persona 2 en la aventura" loading="lazy">
+            </div>
+            <p data-i18n="ustedes.slide3">“Glaciar Ojo del Albino.”</p>
+          </div>
+          <!-- Slide 4 -->
+          <div class="ustedes-slide">
+            <div class="ustedes-slide-media">
+              <img src="imagenes-finales/testimonios/familia.jpg" alt="Persona 2 en la aventura" loading="lazy">
+            </div>
+            <p data-i18n="ustedes.slide4">“Familia en Martial.”</p>
+          </div>
+          <!-- Slide 5 -->
+          <div class="ustedes-slide">
+            <div class="ustedes-slide-media">
+              <img src="imagenes-finales/testimonios/fotomontaña2.jpg" alt="Persona 2 en la aventura" loading="lazy">
+            </div>
+            <p data-i18n="ustedes.slide5">“La mejor aventura en Ojo del Albino y Laguna de los Témpanos.”</p>
+          </div>
+          <!-- Slide 6 -->
+          <div class="ustedes-slide">
+            <div class="ustedes-slide-media">
+              <img src="imagenes-finales/testimonios/grupoLeo.jpg" alt="Persona 2 en la aventura" loading="lazy">
+            </div>
+            <p data-i18n="ustedes.slide6">“Laguna Esmeralda en Verano.”</p>
+          </div>
+          <!-- Slide 7 -->
+          <div class="ustedes-slide">
+            <div class="ustedes-slide-media">
+              <img src="imagenes-finales/testimonios/Imagen de WhatsApp 2025-02-24 a las 17.49.32_a030ce03.jpg" alt="Persona 2 en la aventura" loading="lazy">
+            </div>
+            <p data-i18n="ustedes.slide7">“Disfrutando de la impactante vista hacia Laguna de los Témpanos.”</p>
+          </div>
+          <!-- Slide 8 -->
+          <div class="ustedes-slide">
+            <div class="ustedes-slide-media">
+              <video src="imagenes-finales/testimonios/videocaminata.mp4"
+                     muted autoplay loop playsinline>
+              </video>
+            </div>
+            <p data-i18n="ustedes.slide8">“Caminata a Glaciar Vinciguerra.”</p>
+          </div>
+          <!-- Slide 9 -->
+          <div class="ustedes-slide">
+            <div class="ustedes-slide-media">
+              <video src="imagenes-finales/testimonios/video.mp4"
+                     muted autoplay loop playsinline>
+              </video>
+            </div>
+            <p data-i18n="ustedes.slide9">“Laguna de los Témpanos.”</p>
+          </div>
+          <!-- Slide 10 -->
+          <div class="ustedes-slide">
+            <div class="ustedes-slide-media">
+              <img src="imagenes-finales/testimonios/chinitos.jpg"
+                     muted autoplay loop playsinline>
+            </img>
+            </div>
+          </div>
+          <!-- Slide 11 -->
+          <div class="ustedes-slide">
+            <div class="ustedes-slide-media">
+              <img src="imagenes-finales/testimonios/chinitos2.jpg"
+                     muted autoplay loop playsinline>
+            </img>
+            </div>
+ 
+          </div>
+          <!-- Slide 12 -->
+          <div class="ustedes-slide">
+            <div class="ustedes-slide-media">
+              <img src="imagenes-finales/testimonios/cruzando puente.jpg"
+                     muted autoplay loop playsinline>
+            </img>
+            </div>
+
+          </div>
+          <!-- Slide 13 -->
+          <div class="ustedes-slide">
+            <div class="ustedes-slide-media">
+              <img src="imagenes-finales/testimonios/cueva-hielo.jpg"
+                     muted autoplay loop playsinline>
+            </img>
+            </div>
+   
+          </div>
+          <!-- Slide 14 -->
+          <div class="ustedes-slide">
+            <div class="ustedes-slide-media">
+              <img src="imagenes-finales/testimonios/foto-martial.jpg"
+                     muted autoplay loop playsinline>
+            </img>
+            </div>
+ 
+          </div>
+          <!-- Slide 15 -->
+          <div class="ustedes-slide">
+            <div class="ustedes-slide-media">
+              <img src="imagenes-finales/testimonios/martial-chinitos.jpg"
+                     muted autoplay loop playsinline>
+            </img>
+            </div>
+          </div>
+          <!-- Controles carrusel -->
+          <a class="ustedes-control prev" onclick="ustedesPrev()">&#10094;</a>
+          <a class="ustedes-control next" onclick="ustedesNext()">&#10095;</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Botones fijos de Contacto (WhatsApp) -->
+  <div class="fixed-buttons">
+    <a href="https://wa.me/92901489265" target="_blank" class="fixed-button">
+      <img src="icons/OIP (1)-fotor-bg-remover-2025022112036.png" alt="WhatsApp" loading="lazy">
+    </a>
+  </div>
+
+  <!-- Botón flechita para subir al inicio -->
+  <div class="scroll-top-button" id="scrollTopBtn" onclick="scrollToTop()">
+    &#8679;
+  </div>
+
+ <!-- FOOTER -->
+ <footer class="custom-footer">
+  <div class="footer-logo">
+    <img src="images/logos/2.png" alt="Logo Footer" loading="lazy">
+  </div>
+
+    <!-- Sección de Contacto con Iconos y Texto, estilo “tarjeta” -->
+    <div class="footer-contact-card">
+  <a href="https://wa.me/92901489265" class="footer-contact-item">
+    <img src="icons/whatsapp.png" alt="Teléfono" class="footer-icon" />
+    <span>+54 9 2901 48-9285</span>
+  </a>
+  <a href="mailto:frecuenciasurushuaia@gmail.com" class="footer-contact-item">
+    <img src="icons/sobre.png" alt="Email" class="footer-icon" />
+    <span>frecuenciasurushuaia@gmail.com</span>
+  </a>
+  <a href="https://instagram.com/frecuencia_sur_" target="_blank" class="footer-contact-item">
+    <img src="icons/instagram.png" alt="Instagram" class="footer-icon" />
+    <span>@frecuencia_sur_</span>
+  </a>
+</div>
+
+  <!-- Botones de navegación (opcional) -->
+  <div class="footer-buttons">
+    <a href="https://wa.me/92901489265" class="footer-btn" data-i18n="footer.numero">Número</a>
+    <a href="mailto:frecuenciasurushuaia@gmail.com" class="footer-btn" data-i18n="footer.mail">Mail</a>
+    <a href="#tours" class="footer-btn" data-i18n="footer.tour">Tour</a>
+  </div>
+  
+  <!-- Bloque de Métodos de Pago e Información -->
+  <div class="footer-payment-info">
+    <div class="payment-methods">
+      <img src="icons/DolarApp (1).png" alt="Visa" class="payment-img" loading="lazy">
+      <img src="icons/mercado-pago-fotor-bg-remover-20250307113550.png" alt="Mastercard" class="payment-img" loading="lazy">
+      <img src="icons/paypalpng-fotor-bg-remover-20250307113450.png" alt="PayPal" class="payment-img" loading="lazy">
+    </div>
+    <p data-i18n="contact.paragraph3" class="payment-info-text">
+      Recordamos que todas las excursiones cuentan con traslado ida y vuelta hasta el hospedaje y cobertura total contra accidentes personales.
+    </p>
+  </div>
+  
+  <!-- Bloque para que contacten al creador de la web -->
+  <div class="footer-creator">
+    <p>¿Te gustó la página? Si deseas tener una web como esta, <a href="mailto:ignaamieva999@gmail.com">contáctame</a>. Desarrollado por <a href="https://instagram.com/ignaamievaa" target="_blank">Juan Ignacio Amieva</a>.</p>
+  </div>
+  
+  <div class="footer-copy">
+    <p data-i18n="footer.copy">Copyright © 2025 Frecuencia Sur Ushuaia</p>
+  </div>
+</footer>
+  
+
+  <!-- Script principal -->
+  <script src="js/main.js"></script>
+</body>
+</html>

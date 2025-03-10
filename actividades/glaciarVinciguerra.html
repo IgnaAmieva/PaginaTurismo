@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <!-- Codificación y configuración responsiva -->
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+ <!-- Título único para la página -->
+ <title>Glaciar Vinciguerra - Frecuencia Sur Ushuaia</title>
+
+ <!-- Meta descripción única para SEO -->
+ <meta name="description" content="Descubre Laguna Esmeralda: un trekking inolvidable en el fin del mundo con paisajes únicos y aventura garantizada.">
+ 
+ <!-- Meta keywords (opcional) -->
+ <meta name="keywords" content="trekking, Laguna Esmeralda, Ushuaia, aventura, Tierra del Fuego">
+ 
+ <!-- Autor -->
+ <meta name="author" content="Frecuencia Sur Ushuaia">
+ 
+ <!-- URL canónica: Asegúrate de usar la URL completa de la página -->
+ <link rel="canonical" href="https://www.frecuenciasurushuaia.com/glaciarVinciguerra.html">
+
+ <!-- Open Graph: Para compartir en redes sociales (Instagram, Facebook, etc.) -->
+ <meta property="og:title" content="Laguna Esmeralda - Frecuencia Sur Ushuaia">
+ <meta property="og:description" content="Descubre Laguna Esmeralda: un trekking inolvidable en el fin del mundo con paisajes únicos y aventura garantizada.">
+ <meta property="og:image" content="https://www.frecuenciasurushuaia.com/images/glaciarVinciguerra.html/imagenHero.jpg">
+ <meta property="og:url" content="https://www.frecuenciasurushuaia.com/glaciarVinciguerra.html">
+ <meta property="og:type" content="website">
+
+ <!-- Favicon -->
+ <link rel="icon" href="../images/logos/1.png" type="image/x-icon">
+
+ <!-- Google Fonts -->
+ <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+ <!-- Hoja de estilo principal -->
+ <link rel="stylesheet" href="../css/styles.css">
+
+ <!-- Firebase App (la base de SDK de Firebase) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<!-- Firestore (la base de datos) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+ <!-- Librería i18next para traducciones -->
+ <script src="https://unpkg.com/i18next@21.6.0/dist/umd/i18next.min.js"></script>
+
+ <!-- Google Analytics: Reemplaza 'TU-ID' con tu código real -->
+ <script async src="https://www.googletagmanager.com/gtag/js?id=TU-ID"></script>
+ <script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+   gtag('config', 'TU-ID');
+ </script>
+
+ <!-- Tu configuración de Firebase -->
+<script src="js/firebase-config.js"></script>
+
+  <style>
+    /* ================================
+       Animación (scroll reveal)
+    ================================ */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ================================
+       Estilos globales para h1 y h2 con línea naranja
+    ================================ */
+    h1, h2 {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      font-size: 3rem; 
+      text-align: center;
+      width: 100%;
+    }
+    h2 {
+      font-size: 2.5rem;
+    }
+    h1::after,
+    h2::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 5px;
+      background: #ff7f35;
+    }
+
+    /* ================================
+       HERO (con parallax en desktop y mobile)
+    ================================ */
+    .hero {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      text-align: center;
+    }
+    /* Versión escritorio */
+    .hero-desktop {
+      position: relative;
+      width: 100%;
+      height: 100vh; /* Para ocupar la pantalla completa */
+      background: url("../imagenes-finales/glaciarVinciguerra/passeio-trekking-glaciar-vinciguerra-ushuaia-7.jpg") no-repeat center center;
+      background-size: cover;
+      background-attachment: fixed; /* Efecto parallax */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-desktop img {
+      display: none;
+    }
+    .hero-desktop .hero-caption {
+      color: #fff;
+      z-index: 2;
+      animation: fadeInHero 1s ease forwards;
+      opacity: 0;
+    }
+    .hero-desktop .hero-caption h1 {
+      font-size: 4rem !important;
+    }
+    @keyframes fadeInHero {
+      0% { transform: translateY(-10%); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    /* Versión móvil */
+    .hero-mobile {
+      display: none; /* Ocultamos en desktop */
+    }
+    @media (max-width: 768px) {
+      .hero-desktop {
+        display: none; /* En móvil, ocultamos la versión desktop */
+      }
+      .hero-mobile {
+        display: flex;
+        height: 100vh; 
+        position: relative;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: url("../imagenes-finales/glaciarVinciguerra/glaciar-leo.jpg") no-repeat center center;
+        background-size: cover;
+        background-attachment: fixed;
+      }
+      .hero-mobile img {
+        display: none;
+      }
+      .hero-mobile .hero-caption h1 {
+        font-size: 2rem !important;
+      }
+      .hero-mobile .hero-caption {
+        color: #fff;
+        z-index: 2;
+        animation: fadeInHero 1s ease forwards;
+        opacity: 0;
+      }
+      .hero-wave {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        z-index: 1;
+      }
+    }
+
+    /* ================================
+       SECCIÓN DESCRIPCIÓN
+    ================================ */
+    .tour-description {
+      background: #fff;
+      color: #333;
+      padding: 20px 10px;
+      max-width: 1200px;
+      margin: 10px auto;
+      text-align: justify;
+    }
+    .tour-description h2 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .tour-description p {
+      line-height: 1.6;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    /* ================================
+       MAPA CON RECUADRO NEGRO
+    ================================ */
+    .map-container {
+      text-align: center;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .map-container h4 {
+      margin-bottom: 6px;
+      font-size: 1.2rem;
+      color: #333;
+    }
+    .google-earth-map {
+      display: inline-block;
+      border: 3px solid #000;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    .google-earth-map:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+    }
+    .google-earth-map .ge-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .ge-caption {
+      background: #f7f7f7;
+      padding: 8px;
+      font-size: 1rem;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+    .ge-caption img {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* ================================
+       SECCIÓN DE 4 IMÁGENES (Galería)
+       con pestañas (Verano / Invierno)
+    ================================ */
+    .four-images-section {
+      background: #fff;
+      padding: 10px;
+      max-width: 1200px;
+      margin: 10px auto;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .tab {
+      background-color: #eee;
+      border: none;
+      padding: 10px 20px;
+      margin: 0 5px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #333;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .tab:hover {
+      background-color: #ff7f35;
+      color: #fff;
+    }
+    .tab.active {
+      background-color: #ff7f35;
+      color: #fff;
+    }
+    .images-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    @media (max-width: 768px) {
+      .images-container {
+        flex-direction: column;
+      }
+    }
+    .left-column,
+    .right-column {
+      width: 48%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    @media (max-width: 768px) {
+      .left-column, .right-column {
+        width: 100%;
+      }
+    }
+    .top-left, .bottom-left,
+    .top-right, .bottom-right {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .top-left {
+      aspect-ratio: 4/3; 
+    }
+    .bottom-left {
+      aspect-ratio: 4/5;
+    }
+    .top-right {
+      aspect-ratio: 4/5;
+    }
+    .bottom-right {
+      aspect-ratio: 4/3;
+    }
+    .top-left img,
+    .bottom-left img,
+    .top-right img,
+    .bottom-right img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      top: 0;
+      left: 0;
+      transition: transform 0.5s ease;
+    }
+    .top-left img:hover,
+    .bottom-left img:hover,
+    .top-right img:hover,
+    .bottom-right img:hover {
+      transform: scale(1.05);
+    }
+
+    /* ================================
+       FONDO DEGRADADO
+    ================================ */
+    .gradient-bg {
+      background: linear-gradient(white, #ff7f35);
+      padding: 10px 0;
+    }
+
+    /* ================================
+       SECCIÓN DE INFORMACIÓN DEL TREK
+    ================================ */
+    .info-section {
+      padding: 20px 10px;
+      max-width: 1200px;
+      margin: 10px auto;
+      text-align: center;
+      background: transparent;
+    }
+    .info-section h2 {
+      margin-bottom: 10px;
+      color: #333;
+      font-size: 2.5rem;
+    }
+    .info-section p.subtitle {
+      font-size: 1.1rem;
+      color: #333;
+      margin-bottom: 10px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+    .info-circles {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      justify-items: center;
+    }
+    @media (max-width: 768px) {
+      .info-circles {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px; 
+      }
+    }
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    #dificultadItem    { order: 1; }
+    #distanciaItem     { order: 2; }
+    #duracionItem      { order: 3; }
+    #desnivelItem      { order: 4; }
+    #diasHorariosItem  { order: 5; }
+    #climaItem         { order: 6; }
+    #equipamientoItem  { order: 7; }
+    #infoAdicionalItem { order: 8; }
+    .info-circle {
+      background: #ff7f35;
+      color: #fff;
+      border-radius: 50%;
+      width: 180px;
+      height: 180px;
+      padding: 20px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .info-circle:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+    }
+    .info-circle img {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 0.5rem;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+    .info-circle h3 {
+      margin: 0.5rem 0 0.2rem 0;
+      font-size: 1.1rem;
+      color: #fff;
+      text-align: center;
+    }
+    .info-circle p {
+      font-size: 0.9rem;
+      color: #fff;
+      margin: 0;
+    }
+    @media (max-width: 768px) {
+      .info-circle {
+        width: 150px;
+        height: 150px;
+        padding: 15px;
+        font-size: 0.9rem; 
+      }
+      .info-circle h3 {
+        font-size: 1rem;
+      }
+      .info-circle p {
+        font-size: 0.85rem;
+      }
+    }
+    @media (max-width: 400px) {
+      .info-circle {
+        width: 130px;
+        height: 130px;
+        padding: 10px;
+        font-size: 0.85rem;
+      }
+      .info-circle h3 {
+        font-size: 0.95rem;
+      }
+      .info-circle p {
+        font-size: 0.8rem;
+      }
+      .info-circles {
+        gap: 10px;
+      }
+    }
+    .info-panel {
+      width: 100%;
+      margin-top: 5px;
+      background: #333;
+      color: #fff;
+      border-radius: 6px;
+      padding: 15px;
+      display: none;
+      text-align: left;
+      font-size: 0.9rem;
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.4s ease;
+    }
+    .info-panel.open {
+      display: block;
+      max-height: 600px;
+    }
+
+    /* ================================
+       CARTEL "IMPORTANTE"
+    ================================ */
+    .important-note {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #0c0c0c; 
+      padding: 20px;
+      border-radius: 8px;
+      margin: 50px auto 0 auto;
+      max-width: 800px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      color: #fff;
+      font-size: 1rem;
+      text-align: center;
+    }
+    .important-note img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 10px;
+      filter: brightness(0) invert(1);
+    }
+
+    /* ================================
+       Ajustes para el menú y navbar
+    ================================ */
+    header.navbar {
+      background-color: #fff;
+      border-bottom: 1px solid #ddd;
+    }
+    .logo-img {
+      height: 60px;
+      margin-right: 15px;
+    }
+    @media (max-width: 768px) {
+      .logo-img {
+        height: 50px; 
+      }
+      .logo-text {
+        font-size: 1.3rem;
+      }
+      .nav-links {
+        padding: 60px 20px !important; 
+      }
+    }
+    @media (min-width: 1024px) {
+      .logo-text {
+        font-size: 1.8rem;
+      }
+    }
+    @media (max-width: 350px) {
+      .nav-container {
+        padding: 0 10px !important; 
+      }
+      .logo-img {
+        height: 45px !important; 
+      }
+      .logo-text {
+        font-size: 1.1rem !important;
+      }
+      .nav-links {
+        padding: 50px 20px !important;
+      }
+    }
+
+    /* ================================
+       Estilo para el botón "Volver al Inicio" en footer
+    ================================ */
+    .footer-back-to-top {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .footer-back-to-top a {
+      display: inline-block;
+      background-color: #ff7f35;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+    .footer-back-to-top a:hover {
+      background-color: #e96b1f;
+    }
+
+    /* ================================
+       Panel de Tours (dropdown)
+       (aspecto "igual al tuyo")
+    ================================ */
+    #toursPanel {
+      display: none;
+      position: absolute;
+      top: 70px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      z-index: 999;
+      padding: 10px 0;
+      border-radius: 4px;
+    }
+    #toursPanel .tours-panel-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #toursPanel .tour-link {
+      text-decoration: none;
+      color: #333;
+      font-weight: 600;
+      padding: 8px 20px;
+      width: 100%;
+      text-align: center;
+      transition: background 0.3s;
+    }
+    #toursPanel .tour-link:hover {
+      background: #ff7f35;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+   <!-- NAVBAR -->
+   <header class="navbar transparent fade-in" id="navbar">
+    <div class="nav-container">
+      <!-- LOGO -->
+      <div class="logo-area">
+        <img src="../images/logos/1.png" alt="Logo" class="logo-img" loading="lazy"/>
+        <span class="logo-text" data-i18n="navbar.logoText">Frecuencia Sur Ushuaia</span>
+      </div>
+      <!-- Menú (desktop & mobile) -->
+      <nav class="nav-links" id="navLinks">
+        <ul>
+          <li><a href="../index.html#home" data-i18n="navbar.inicio">Inicio</a></li>
+          <li><a href="../index.html#tours" data-i18n="navbar.tours">Tours</a></li>
+          <li><a href="../index.html#sobreNosotros" data-i18n="navbar.sobreNosotros">Sobre Nosotros</a></li>
+          <li><a href="../index.html#contact" data-i18n="navbar.contacto">Contacto</a></li>
+          <li class="nav-last-item"><a href="../index.html#ustedes" data-i18n="navbar.ustedes">Ustedes</a></li>
+          <!-- Dropdown de idioma -->
+          <li class="lang-dropdown">
+            <button class="lang-main-btn" id="langMainBtn" data-i18n="navbar.lenguajeBtn">Lenguaje</button>
+            <div class="dropdown-content" id="dropdownContent">
+              <button class="lang-btn" data-lang="es">ES</button>
+              <button class="lang-btn" data-lang="en">EN</button>
+              <button class="lang-btn" data-lang="pt">PT</button>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <!-- Botón hamburguesa (móvil) -->
+      <div class="hamburger" id="hamburgerBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO ESCRITORIO -->
+  <section class="hero hero-desktop fade-in" id="home">
+    <img src="../imagenes-finales/GlacialMartial/AQ3Q3838.jpg" alt="Glaciar Vinciguerra Hero" loading="lazy"/>
+    <div class="hero-caption">
+      <h1 data-i18n="vinciguerraPage.heroH1">Glaciar Vinciguerra</h1>
+      <p data-i18n="vinciguerraPage.heroSubtitle">Trekking en el Fin del Mundo</p>
+      <a href="#tourDescription" class="btn-primary scroll-link" data-i18n="vinciguerraPage.heroBtnReserva">¡Reserva Aquí!</a>
+    </div>
+  </section>
+
+  <!-- HERO MÓVIL -->
+  <section class="hero hero-mobile fade-in" id="homeMobile">
+    <img src="../imagenes-finales/GLACIAR-OJO-DE-ALBINO/1676148196019d668d19282171834d8c5.webp" alt="Hero Móvil" loading="lazy"/>
+    <div class="hero-caption">
+      <h1 data-i18n="vinciguerraPage.heroH1">Glaciar Vinciguerra</h1>
+      <a href="https://wa.me/92901489265" class="btn-primary scroll-link" data-i18n="vinciguerraPage.heroBtnReserva">¡Reserva Aquí!</a>
+    </div>
+    <!-- Onda SVG SOLO para móvil -->
+    <svg class="hero-wave" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path fill="#fff" d="M0,180L30,160C60,140,120,100,180,120C240,140,300,220,360,240C420,260,480,220,540,210C600,200,660,220,720,230C780,240,840,220,900,190C960,160,1020,120,1080,130C1140,140,1200,180,1260,190C1320,200,1380,180,1410,170L1440,160L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path>
+    </svg>
+  </section>
+
+  <!-- SECCIÓN PRINCIPAL: Texto + DESCRIPCIÓN -->
+  <section class="tour-description fade-in" id="tourDescription">
+    <h2 data-i18n="vinciguerraPage.sectionTitle">Laguna de los Témpanos y Glaciar Vinciguerra, el lugar de tus sueños</h2>
+    <p data-i18n="vinciguerraPage.sectionPar1">
+      Comenzamos sobre un área de fácil acceso...
+    </p>
+    <div class="map-container fade-in">
+      <h4 data-i18n="vinciguerraPage.sectionMapTitle">Ubicación en Google Earth</h4>
+      <div class="google-earth-map">
+        <a href="https://earth.google.com/web/https://earth.google.com/web/search/Glaciar+Vinciguerra,+Ushuaia,+Tierra+del+Fuego/@-54.7264723,-68.3363048,831.30345608a,463.38200616d,35y,0h,0t,0r/data=Cp0BGm8SaQolMHhiYzRjM2RiZGUzZTk1OTk5OjB4YmZmYTRlOWMyOWE2N2NlNhmW-VgL_VxLwCE4X5EEhhVRwCouR2xhY2lhciBWaW5jaWd1ZXJyYSwgVXNodWFpYSwgVGllcnJhIGRlbCBGdWVnbxgCIAEiJgokCYLAoX8bYEvAEY2MzIwbYEvAGc6ZIuJgFFHAIdGtvflgFFHAQgIIAToDCgEwQgIIAEoNCP___________wEQAA" target="_blank">
+          <img class="ge-image" src="../imagenes-finales/glaciarVinciguerra/Captura de pantalla 2025-02-28 151449.png" alt="Ver en Google Earth" loading="lazy">
+        </a>
+        <div class="ge-caption">
+          <img src="../icons/icon-actividades/cursor (1).png" alt="Click Icon" loading="lazy">
+          <span data-i18n="vinciguerraPage.sectionMapCaption">Click para imágenes satelitales</span>
+        </div>
+      </div>
+    </div>
+    <p data-i18n="vinciguerraPage.sectionPar2">
+      La última etapa del ascenso es sobre terreno montañoso con una desafiante pendiente...
+    </p>
+  </section>
+
+  <!-- SECCIÓN DE 4 IMÁGENES (Galería) con pestañas -->
+  <section class="four-images-section fade-in" id="fourImages">
+    <div class="tabs">
+      <button id="summerTab" class="tab active" data-i18n="vinciguerraPage.summerTab">Verano</button>
+      <button id="winterTab" class="tab" data-i18n="vinciguerraPage.winterTab">Invierno</button>
+    </div>
+    <!-- Galería Verano -->
+    <div id="summerGallery" class="images-container">
+      <div class="left-column">
+        <div class="top-left fade-in">
+          <img src="../imagenes-finales/glaciarVinciguerra/passeio-trekking-glaciar-vinciguerra-ushuaia-6.jpg" alt="Verano Top Left" loading="lazy">
+        </div>
+        <div class="bottom-left fade-in">
+          <img src="../imagenes-finales/glaciarVinciguerra/grieta-leo.jpg" alt="Verano Bottom Left" loading="lazy">
+        </div>
+      </div>
+      <div class="right-column">
+        <div class="top-right fade-in">
+          <img src="../imagenes-finales/glaciarVinciguerra/pexels-gabii-fernandez-199438359-11545054.jpg" alt="Verano Top Right" loading="lazy">
+        </div>
+        <div class="bottom-right fade-in">
+          <img src="../imagenes-finales/glaciarVinciguerra/passeio-trekking-glaciar-vinciguerra-ushuaia-7.jpg" alt="Verano Bottom Right" loading="lazy">
+        </div>
+      </div>
+    </div>
+    <!-- Galería Invierno (oculta) -->
+    <div id="winterGallery" class="images-container" style="display: none;">
+      <div class="left-column">
+        <div class="top-left fade-in">
+          <img src="../imagenes-finales/glaciarVinciguerra/caminatavinci.jpg" alt="Invierno Top Left" loading="lazy">
+        </div>
+        <div class="bottom-left fade-in">
+          <img src="../imagenes-finales/glaciarVinciguerra/glaciar vinci cuevas.jpg" alt="Invierno Bottom Left" loading="lazy">
+        </div>
+      </div>
+      <div class="right-column">
+        <div class="top-right fade-in">
+          <img src="../imagenes-finales/glaciarVinciguerra/chicaGlaciar.jpg" alt="Invierno Top Right" loading="lazy">
+        </div>
+        <div class="bottom-right fade-in">
+          <img src="../imagenes-finales/glaciarVinciguerra/montañaVinci.jpg" alt="Invierno Bottom Right" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN DE INFORMACIÓN DEL TREK Y NOTA IMPORTANTE CON FONDO DEGRADADO -->
+  <div class="gradient-bg fade-in">
+    <section class="info-section fade-in">
+      <h2 data-i18n="vinciguerraPage.infoTitle">Información del Trek</h2>
+      <p class="subtitle" data-i18n="vinciguerraPage.infoSubtitle">
+        Datos clave para que planees tu aventura...
+      </p>
+      <div class="info-circles">
+        <!-- Dificultad -->
+        <div class="info-item">
+          <div class="info-circle">
+            <img src="../icons/icon-actividades/dificultad-media.png" alt="Dificultad" loading="lazy">
+            <h3 data-i18n="vinciguerraPage.dificTitle">Dificultad</h3>
+            <p data-i18n="vinciguerraPage.dificValue">Media/Alta</p>
+          </div>
+        </div>
+        <!-- Distancia -->
+        <div class="info-item">
+          <div class="info-circle">
+            <img src="../icons/icon-actividades/recorrido.png" alt="Distancia" loading="lazy">
+            <h3 data-i18n="vinciguerraPage.distTitle">Distancia</h3>
+            <p data-i18n="vinciguerraPage.distValue">12 km</p>
+          </div>
+        </div>
+        <!-- Duración -->
+        <div class="info-item">
+          <div class="info-circle">
+            <img src="../icons/icon-actividades/flecha-arriba-del-reloj.png" alt="Duración" loading="lazy">
+            <h3 data-i18n="vinciguerraPage.duraTitle">Duración</h3>
+            <p data-i18n="vinciguerraPage.duraValue">8 horas</p>
+          </div>
+        </div>
+        <!-- Desnivel -->
+        <div class="info-item">
+          <div class="info-circle">
+            <img src="../icons/icon-actividades/desnivel.png" alt="Desnivel" loading="lazy">
+            <h3 data-i18n="vinciguerraPage.desnTitle">Desnivel</h3>
+            <p data-i18n="vinciguerraPage.desnValue">600 m</p>
+          </div>
+        </div>
+        <!-- Días y Horarios -->
+        <div class="info-item">
+          <div class="info-circle">
+            <img src="../icons/icon-actividades/calendario.png" alt="Días y Horarios" loading="lazy">
+            <h3 data-i18n="vinciguerraPage.diasTitle">Días y Horarios</h3>
+            <p data-i18n="vinciguerraPage.diasValue">Pick Up 09:00hs</p>
+          </div>
+        </div>
+        <!-- Clima -->
+        <div class="info-item">
+          <div class="info-circle">
+            <img src="../icons/icon-actividades/clima.png" alt="Clima" loading="lazy">
+            <h3 data-i18n="vinciguerraPage.climaTitle">Clima</h3>
+            <p data-i18n="vinciguerraPage.climaValue">Frío, lluvia, nevada, viento</p>
+          </div>
+        </div>
+       <!-- 7: Equipamiento (panel) -->
+       <div class="info-item">
+        <div class="info-circle collapsible" data-target="#equipamientoPanel">
+          <img src="../icons/icon-actividades/bota-de-senderismo.png" alt="Equipamiento" loading="lazy">
+          <h3 data-i18n="lagunaEsmeraldaPage.equipTitle">Equipamiento (No incluido)</h3>
+          <p>▼</p>
+        </div>
+        <div id="equipamientoPanel" class="info-panel">
+          <h4 data-i18n="lagunaEsmeraldaPage.equipPanel">
+            <strong>Son imprescindibles</strong>
+          </h4>
+          <p data-i18n="lagunaEsmeraldaPage.equipPanel2">
+             botas o borcegos de trekking...
+          </p>
+        </div>
+      </div>
+
+      <!-- 8: Info Adicional (panel) -->
+      <div class="info-item">
+        <div class="info-circle collapsible" data-target="#infoAdicionalPanel">
+          <img src="../icons/icon-actividades/advertencia-de-triangulo.png" alt="Info adicional" loading="lazy">
+          <h3 data-i18n="lagunaEsmeraldaPage.infoAdTitle">Info Adicional</h3>
+          <p>▼</p>
+        </div>
+        <div id="infoAdicionalPanel" class="info-panel">
+          <ul>
+            <li data-i18n="lagunaEsmeraldaPage.infoAdPanel1">Incluye un box lunch...</li>
+            <li data-i18n="lagunaEsmeraldaPage.infoAdPanel2">Incluye un box lunch...</li>
+            <li data-i18n="lagunaEsmeraldaPage.infoAdPanel3">No se cancela por lluvias...</li>
+            <li data-i18n="lagunaEsmeraldaPage.infoAdPanel4">No se cancela por lluvias...</li>
+            <li data-i18n="lagunaEsmeraldaPage.infoAdPanel5">No se cancela por lluvias...</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARTEL IMPORTANTE -->
+    <div class="important-note fade-in">
+      <img src="../icons/icon-actividades/advertencia-de-triangulo.png" alt="Advertencia" loading="lazy">
+      <h3 data-i18n="lagunaEsmeraldaPage.importantNoteTitle">IMPORTANTE</h3>
+      <p data-i18n="lagunaEsmeraldaPage.importantNoteParagraph">
+        Si el pasajero no se presenta o las condiciones climáticas no son adecuadas...
+      </p>
+      <p data-i18n="lagunaEsmeraldaPage.importantNoteParagraph2"></p>
+      <h4 lagunaEsmeraldaPage.infoAdTitle2>Ayúdanos a reducir el impacto de nuestra actividad Por favor, lleva tu botella de agua reutilizable.</h4>
+  </section>
+</div>
+
+  <!-- FOOTER -->
+ <!-- FOOTER -->
+ <footer class="custom-footer">
+  <div class="footer-logo">
+    <img src="../images/logos/2.png" alt="Logo Footer" loading="lazy">
+  </div>
+
+    <!-- Sección de Contacto con Iconos y Texto, estilo “tarjeta” -->
+    <div class="footer-contact-card">
+  <a href="https://wa.me/92901489265" class="footer-contact-item">
+    <img src="../icons/whatsapp.png" alt="Teléfono" class="footer-icon" />
+    <span>+54 9 2901 48-9285</span>
+  </a>
+  <a href="mailto:frecuenciasurushuaia@gmail.com" class="footer-contact-item">
+    <img src="../icons/sobre.png" alt="Email" class="footer-icon" />
+    <span>frecuenciasurushuaia@gmail.com</span>
+  </a>
+  <a href="https://instagram.com/frecuencia_sur_" target="_blank" class="footer-contact-item">
+    <img src="../icons/instagram.png" alt="Instagram" class="footer-icon" />
+    <span>@frecuencia_sur_</span>
+  </a>
+</div>
+
+  <!-- Botones de navegación (opcional) -->
+  <div class="footer-buttons">
+    <a href="https://wa.me/92901489265" class="footer-btn" data-i18n="footer.numero">Número</a>
+    <a href="mailto:frecuenciasurushuaia@gmail.com" class="footer-btn" data-i18n="footer.mail">Mail</a>
+    <a href="#tours" class="footer-btn" data-i18n="footer.tour">Tour</a>
+  </div>
+  
+  <!-- Bloque de Métodos de Pago e Información -->
+  <div class="footer-payment-info">
+    <div class="payment-methods">
+      <img src="../icons/DolarApp (1).png" alt="Visa" class="payment-img" loading="lazy">
+      <img src="../icons/mercado-pago-fotor-bg-remover-20250307113550.png" alt="Mastercard" class="payment-img" loading="lazy">
+      <img src="../icons/paypalpng-fotor-bg-remover-20250307113450.png" alt="PayPal" class="payment-img" loading="lazy">
+    </div>
+    <p data-i18n="contact.paragraph3" class="payment-info-text">
+      Recordamos que todas las excursiones cuentan con traslado ida y vuelta hasta el hospedaje y cobertura total contra accidentes personales.
+    </p>
+  </div>
+  
+  <!-- Bloque para que contacten al creador de la web -->
+  <div class="footer-creator">
+    <p>¿Te gustó la página? Si deseas tener una web como esta, <a href="mailto:ignaamieva999@gmail.com">contáctame</a>. Desarrollado por <a href="https://instagram.com/ignaamievaa" target="_blank">Juan Ignacio Amieva</a>.</p>
+  </div>
+  
+  <div class="footer-copy">
+    <p data-i18n="footer.copy">Copyright © 2025 Frecuencia Sur Ushuaia</p>
+  </div>
+</footer>
+
+  <!-- Botones fijos de Contacto -->
+  <div class="fixed-buttons fade-in">
+    <a href="https://wa.me/92901654644" target="_blank" class="fixed-button">
+      <img src="../icons/OIP (1)-fotor-bg-remover-2025022112036.png" alt="WhatsApp" loading="lazy">
+    </a>
+  </div>
+
+  <!-- Botón flechita para subir -->
+  <div class="scroll-top-button fade-in" id="scrollTopBtn" onclick="scrollToTop()">
+    &#8679;
+  </div>
+
+  <!-- Script principal -->
+  <script src="../js/main.js"></script>
+
+  <!-- Script para Intersection Observer y toggling de paneles -->
+  <script>
+    // FADE-IN
+    const fadeElements = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    fadeElements.forEach(el => observer.observe(el));
+
+    // Botón "Scroll to top"
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Paneles tipo acordeón (equipamiento, info adicional)
+    document.addEventListener('click', (e) => {
+      const collapsible = e.target.closest('.collapsible');
+      if (collapsible) {
+        const targetId = collapsible.getAttribute('data-target');
+        const panel = document.querySelector(targetId);
+        if (panel) {
+          if (panel.classList.contains('open')) {
+            panel.classList.remove('open');
+            setTimeout(() => {
+              panel.style.display = 'none';
+            }, 400);
+          } else {
+            panel.style.display = 'block';
+            setTimeout(() => {
+              panel.classList.add('open');
+            }, 0);
+          }
+        }
+      }
+    });
+  </script>
+
+  <!-- Script para el cambio de pestañas en la galería -->
+  <script>
+    const summerTab = document.getElementById('summerTab');
+    const winterTab = document.getElementById('winterTab');
+    const summerGallery = document.getElementById('summerGallery');
+    const winterGallery = document.getElementById('winterGallery');
+
+    summerTab.addEventListener('click', () => {
+      summerTab.classList.add('active');
+      winterTab.classList.remove('active');
+      summerGallery.style.display = 'flex';
+      winterGallery.style.display = 'none';
+    });
+
+    winterTab.addEventListener('click', () => {
+      winterTab.classList.add('active');
+      summerTab.classList.remove('active');
+      winterGallery.style.display = 'flex';
+      summerGallery.style.display = 'none';
+    });
+  </script>
+
+  <!-- Script para el Panel de Tours (toggle) -->
+  <script>
+    const toursMenu = document.getElementById('toursMenu');
+    const toursPanel = document.getElementById('toursPanel');
+
+    toursMenu.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (toursPanel.style.display === 'none' || toursPanel.style.display === '') {
+        toursPanel.style.display = 'block';
+      } else {
+        toursPanel.style.display = 'none';
+      }
+    });
+
+    // Cerrar el panel si se hace clic fuera
+    document.addEventListener('click', (e) => {
+      if (!toursPanel.contains(e.target) && e.target !== toursMenu) {
+        toursPanel.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "projects": {
+    "default": "frecuenciasurushuaia-1e061"
+  },
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
