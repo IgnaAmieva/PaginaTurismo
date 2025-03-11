@@ -157,24 +157,7 @@ if (ustedesSlides.length > 0) {
   showUstedes(ustedesIndex);
 }
 
-let touchStartY = 0;
-
-window.addEventListener('touchstart', function(e) {
-  // Guardamos la posición vertical inicial del toque
-  touchStartY = e.touches[0].clientY;
-}, { passive: false });
-
-window.addEventListener('touchmove', function(e) {
-  let touchCurrentY = e.touches[0].clientY;
-  let touchDiff = touchCurrentY - touchStartY;
-
-  // Si estamos en el tope de la página y el usuario desliza hacia abajo (touchDiff > 0),
-  // evitamos el comportamiento por defecto para impedir el overscroll.
-  if (window.scrollY <= 0 && touchDiff > 0) {
-    e.preventDefault();
-  }
-}, { passive: false });
-
+const savedLanguage = localStorage.getItem('selectedLanguage') || 'es';
 /********************************************
  * i18next: configuración y traducciones
  ********************************************/
@@ -192,7 +175,6 @@ const resources = {
             ustedes: "Ustedes",
             lenguajeBtn: "Idioma"
           },
-          
           tours: {
             title: "Tours, Expediciones y Actividades",
             paragraph: "No importa si viajas solo, en grupo o en familia, tenemos una experiencia para ti...",
@@ -1036,22 +1018,6 @@ function updateContent() {
   });
 }
 
- // Función para mostrar el banner si no se han aceptado las cookies
- function checkCookies() {
-  if (!localStorage.getItem('cookiesAccepted')) {
-    document.getElementById('cookieConsentBanner').style.display = 'block';
-  }
-}
-
-// Al hacer clic en "Aceptar", se guarda la preferencia y se oculta el banner
-document.getElementById('acceptCookies').addEventListener('click', function() {
-  localStorage.setItem('cookiesAccepted', 'true');
-  document.getElementById('cookieConsentBanner').style.display = 'none';
-});
-
-// Ejecuta la función al cargar la página
-checkCookies();
-
 /********************************************
  * Manejo de botones de idioma
  ********************************************/
@@ -1085,5 +1051,37 @@ document.addEventListener('click', (e) => {
   if (!dropdownContent.contains(e.target) && e.target !== langMainBtn) {
     dropdownContent.classList.remove('show');
   }
-   
+});
+document.addEventListener('DOMContentLoaded', function() {
+  // --- Manejo del Banner de Cookies ---
+  const cookieBanner = document.getElementById('cookieConsentBanner');
+  const acceptBtn = document.getElementById('acceptCookies');
+
+  // Mostrar el banner si aún no se aceptaron las cookies
+  if (!localStorage.getItem('cookiesAccepted')) {
+    cookieBanner.style.display = 'block';
+  } else {
+    cookieBanner.style.display = 'none';
+  }
+
+  // Al hacer clic en "Aceptar", guarda la preferencia y oculta el banner
+  acceptBtn.addEventListener('click', function() {
+    localStorage.setItem('cookiesAccepted', 'true');
+    cookieBanner.style.display = 'none';
+  });
+
+  // --- Prevención del Overscroll en Móviles ---
+  let touchStartY = 0;
+  window.addEventListener('touchstart', function(e) {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: false });
+
+  window.addEventListener('touchmove', function(e) {
+    let touchCurrentY = e.touches[0].clientY;
+    let touchDiff = touchCurrentY - touchStartY;
+    // Si estamos en el tope de la página y el usuario desliza hacia abajo, prevenir el scroll
+    if (window.scrollY <= 0 && touchDiff > 0) {
+      e.preventDefault();
+    }
+  }, { passive: false });
 });
