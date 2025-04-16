@@ -79,10 +79,6 @@ a {
 .navbar.scrolled .nav-links ul li a {
   color: #333;
 }
-/* .scrolled .lang-main-btn {
-  color: #333;
-  border-color: #ccc;
-} */
 @media (max-width: 768px) {
   .scrolled {
     padding: 20px 0;
@@ -607,7 +603,6 @@ a {
 /* ================================
    CONTACT
 ================================ */
-
 /* Logo en la tarjeta de contacto */
 .contact-logo {
   width: 80px;
@@ -1020,7 +1015,6 @@ footer.custom-footer {
 
 /* ----- Ajustes Responsivos (Escritorio) ----- */
 @media (min-width: 1024px) {
-  /* Aumenta el tamaño de los logos de pago */
   .payment-img {
     width: 150px;
   }
@@ -1130,4 +1124,15 @@ footer.custom-footer .footer-logo img {
   color: #333;
   cursor: pointer;
   font-weight: bold;
+}
+
+/* CAMBIO AQUÍ: 
+   Forzamos que h1 y h2 sean "display: block"
+   para que aparezcan uno debajo del otro 
+   en lugar de inline-block.
+*/
+h1, h2 {
+  position: relative;
+  display: block !important; /* << forzamos block */
+  margin-bottom: 1.5rem;
 }
